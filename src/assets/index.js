@@ -4,6 +4,8 @@ import logo_schwarz from './HNEE_Logo_Dt_schwarz.svg';
 import logo_kurz from './HNEE_Logo_Kurzform_A_gruen.svg';
 import logo_zammad from './logo_zammad.png';
 import github from './github.png';
+import close from './close.svg';
+import menu from './menu.svg';
 
 export {
     logo_gruen,
@@ -11,5 +13,7 @@ export {
     logo_schwarz,
     logo_kurz,
     logo_zammad,
-    github
+    github,
+    close,
+    menu
 };

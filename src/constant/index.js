@@ -1,4 +1,4 @@
-import { discord, twitch, instagram, github } from "../assets"
+import { github } from "../assets"
 
 
 export const navLinks = [
@@ -15,8 +15,8 @@ export const navLinks = [
         title: "Tools"
     },
     {
-        id:"",
-        title: "Wetter-App"
+        id:"Cool",
+        title: "Cool"
     }
      
 ]
