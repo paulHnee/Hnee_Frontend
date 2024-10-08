@@ -3,8 +3,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import LogoGruen from "../assets/HNEE_Logo_Dt_gruen.svg"; 
-import { close, menu } from "../assets"; // Corrected import path
-import { navLinks } from "../constant"; // Corrected import path
+import { close, menu } from "../assets"; 
+import { navLinks } from "../constant"; 
 
 
 const Navbar = () => {
@@ -19,7 +19,9 @@ const Navbar = () => {
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
       <div>
-        <LogoGruen  alt="logo" className="shadow-md 2xl:ml-[-100px] mr-20" width={450} height={150} />
+        <a href="#">
+          <LogoGruen alt="logo" className="shadow-md 2xl:ml-[-100px] mr-20" width={450} height={150} />
+        </a>
       </div>
      <div>
         <ul className="list-none sm:flex hidden justify-start items-center flex-1">
