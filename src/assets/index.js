@@ -6,6 +6,8 @@ import logo_zammad from './logo_zammad.png';
 import github from './github.png';
 import close from './close.svg';
 import menu from './menu.svg';
+import email from './email.png';
+import request from './request.png';
 
 export {
     logo_gruen,
@@ -15,5 +17,7 @@ export {
     logo_zammad,
     github,
     close,
-    menu
+    menu,
+    email,
+    request
 };

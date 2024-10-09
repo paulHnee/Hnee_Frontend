@@ -1,5 +1,5 @@
 import styles from "../style";
-import Page from "../components/page"; // Ensure the correct import path
+import { Kontakt, Page, Zeiten } from "./index";
 import React from "react";
 
 const Front = () => (
@@ -11,12 +11,12 @@ const Front = () => (
     </div>
     <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
       <div className={`${styles.boxWidth}`}>
-        {/* Add content here */}
+        <Zeiten />
       </div>
     </div>
     <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
       <div className={`${styles.boxWidth}`}>
-        {/* Add content here */}
+        <Kontakt />
       </div>
     </div>
   </div>
