@@ -30,12 +30,12 @@ export const footerLinks = [
                 link: "https://github.com/paulhnee",
             },
             {
-                name: "",
-                link: ""
+                name: "test",
+                link: "h"
             },
             {
-                name: "",
-                link: ""
+                name: "test1",
+                link: "a"
             },
         ],
     },
@@ -43,16 +43,16 @@ export const footerLinks = [
         title: "Projekte",
         links:[
             {
-                name: "",
-                link: ""
+                name: "test2",
+                link: "b"
             },
             {
-                name: "",
-                link: "",
+                name: "test3",
+                link: "c",
             },
             {
-                name: "",
-                link: "",
+                name: "test4",
+                link: "d",
             }
         ],
     },
@@ -61,11 +61,11 @@ export const footerLinks = [
         links:[
             {
                 name: "Impressum",
-                link: "impressum",
+                link: "https://new.hnee.de/impressum",
             },
             {
                 name: "Datenschutzerklärung",
-                link: "privacy-policy"
+                link: "https://new.hnee.de/datenschutzerklaerung"
             }
         ],
     }
@@ -73,19 +73,19 @@ export const footerLinks = [
 
 export const socialMedia = [
     {
-        id: "",
+        id: "1",
         icon: "",
-        link: ""
+        link: "f"
     },
     {
-        id: "",
+        id: "2",
         icon: "",
-        link: ""
+        link: "g"
     },
     {
-        id: "",
+        id: "3",
         icon: "",
-        link: ""
+        link: "h"
     },
     {
         id: "github",

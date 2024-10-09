@@ -2,9 +2,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import LogoGruen from "../assets/HNEE_Logo_Dt_gruen.svg"; 
-import { close, menu } from "../assets"; 
-import { navLinks } from "../constant"; 
+import LogoGruen from "../../assets/HNEE_Logo_Dt_gruen.svg";
+import LogoWeiss from "../../assets/logo-de.svg";
+import { close, menu } from "../../assets";
+import { navLinks } from "../../constant"; 
 
 
 const Navbar = () => {
@@ -19,9 +20,9 @@ const Navbar = () => {
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
       <div>
-        <a href="#">
-          <LogoGruen alt="logo" className="shadow-md 2xl:ml-[-100px] mr-20" width={450} height={150} />
-        </a>
+        <Link href="/">
+          <LogoWeiss alt="logo" className=" 2xl:ml-[-100px] mr-20" width={450} height={150} />
+        </Link>
       </div>
      <div>
         <ul className="list-none sm:flex hidden justify-start items-center flex-1">
@@ -50,7 +51,7 @@ const Navbar = () => {
         <Image
           src={toggle ? close : menu}
           alt="menu"
-          className="w-[28px] h-[28px] object-contain"
+          className="w-[28px] h-[28px] object-contain fill-white"
           onClick={() => setToggle(!toggle)}
           width={28}
           height={28}

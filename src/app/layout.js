@@ -1,8 +1,7 @@
 import localFont from "next/font/local";
-import "./globals.css";
-import styles from "./style";
-import Navbar from "./navbar"; // Adjust the import path as necessary
-import Footer from "./footer"; // Adjust the import path as necessary
+import styles from './style';
+import "./globals.css"; //NEED TO BE HERE
+import { Navbar, Footer, Front } from './components';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,25 +17,31 @@ const geistMono = localFont({
 export const metadata = {
   title: "HNEE - ITSZ",
   description: "IT-Servicezentrum der HNEE",
+  author: "Paul Buchwald",
 };
 
-export default function RootLayout({ children }) {
+const RootLayout =() => {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="bg-primary overflow-hidden w-full">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <meta name="author" content={metadata.author} />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div className="bg-modernGreen overflow-hidden w-full">
           <div className={`${styles.paddingX} ${styles.flexCenter}`}>
             <div className={`${styles.boxWidth}`}>
               <Navbar />
             </div>
           </div>
         </div>
-        <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+        <div className={`bg-white ${styles.paddingX} ${styles.flexCenter}`}>
           <div className={`${styles.boxWidth}`}>
             <main>
-              {children}
+              <Front />
             </main>
             <Footer />
           </div>
@@ -45,3 +50,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+export default RootLayout;	
