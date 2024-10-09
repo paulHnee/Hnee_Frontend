@@ -1,4 +1,4 @@
-import styles from "../style";
+import styles from "../app/style";
 import { Kontakt, Page, Zeiten } from "./index";
 import React from "react";
 

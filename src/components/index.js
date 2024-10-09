@@ -1,7 +1,7 @@
 import Page from './page.jsx';
-import Navbar from './navbar';
-import Footer from './footer';
-import Front from './front';
+import Navbar from './common/navbar.jsx';
+import Footer from './footer.jsx';
+import Front from './front.jsx';
 import Zeiten from './zeiten.jsx'
 import Kontakt from './kontakt.jsx'
 

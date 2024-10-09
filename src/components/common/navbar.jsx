@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LogoGruen from "../../assets/HNEE_Logo_Dt_gruen.svg";
 import LogoWeiss from "../../assets/logo-de.svg";
-import { close, menu } from "../../assets";
+import { close, menu } from "../../app/assets";
 import { navLinks } from "../../constant"; 
 
 

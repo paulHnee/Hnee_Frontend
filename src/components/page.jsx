@@ -23,7 +23,7 @@ const Page = () => {
           </div> */}
           <ul className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-8 items-center">
             <li className="flex flex-col items-center space-y-4 p-4">
-              <Link href="/team" rel="noopener noreferrer">
+              <Link href="/itsz">
                 <Image src={team} alt="Team" className="ml-[4.5rem]"/>
                 <span className="text-3xl mt-4">Team & Erreichbarkeit</span>
               </Link>
