@@ -93,3 +93,9 @@ export const socialMedia = [
         link: "https://github.com/paulhnee"
     }
 ]
+
+export const about = [
+    {
+        
+    }
+]
