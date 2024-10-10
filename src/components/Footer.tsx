@@ -5,6 +5,7 @@ import { footerLinks, socialMedia } from '@/types/global'
 
 const Footer = () => {
   return (
+    <div>
     <section className={`${styles.flexCenter} ${styles.paddingY} flex-col mt-24 `}>
       <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>
         <div className="flex-[1.5] w-full flex flex-row justify-between flex-wrap md:mt-0 mt-10">
@@ -15,9 +16,17 @@ const Footer = () => {
               </h4>
               <ul className="list-none mt-3">
                 {link.links.map((items, index) => (
-                  <li key={items.name} className={`font-poppins font-normal text-[16px] leading-[24px] text-dimBlack hover:text-secondary cursor-pointer ${index !== link.links.length - 1 ? 'mb-2' : 'mb-0'}`}>
+                  <li
+                    key={items.name}
+                    className={`font-poppins font-normal text-[16px] leading-[24px] text-dimBlack hover:text-secondary cursor-pointer ${index !== link.links.length - 1 ? 'mb-1' : 'mb-0'}`} // Reduced margin-bottom
+                  >
                     {items.external ? (
-                      <a href={items.link} target="_blank" rel="noopener noreferrer" className="text-black hover:text-secondary">
+                      <a
+                        href={items.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-black hover:text-secondary"
+                      >
                         {items.name}
                       </a>
                     ) : (
@@ -38,13 +47,23 @@ const Footer = () => {
         </p>
         <div className="flex flex-row md:mt-0 mt-6">
           {socialMedia.map((media, index) => (
-            <a key={media.id} href={media.link} target="_blank" rel="noopener noreferrer">
-              <Image src={media.icon} alt={media.id} className={`w-[21px] h-[21px] object-contain cursor-pointer fill-white ${index !== socialMedia.length - 1 ? 'mr-6' : 'mr-0'}`} />
+            <a
+              key={media.id}
+              href={media.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src={media.icon}
+                alt={media.id}
+                className={`w-[21px] h-[21px] object-contain cursor-pointer fill-white ${index !== socialMedia.length - 1 ? 'mr-4' : 'mr-0'}`} // Reduced margin-right
+              />
             </a>
           ))}
         </div>
       </div>
     </section>
+    </div>
   );
 };
 export default Footer;

@@ -1,13 +1,13 @@
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import LogoWeiss from "@/assets/logo-de.svg";
-import close from "@/assets/close.svg";
-import menu from "@/assets/menu.svg";
-import { navLinks } from "@/types/global"; 
+import LogoWeiss from "../../public/assets/svg/logo-de.svg";
+import close from "../../public/assets/svg/close.svg";
+import menu from "../../public/assets/svg/menu.svg";
+import { navLinks } from "@/types/global";
 
-
-const Navbar = () => {
+export default function Navbar() {
   const [toggle, setToggle] = useState(false);
   const [activeIdLink, setActiveIdLink] = useState<string | null>(null);
 
@@ -20,25 +20,19 @@ const Navbar = () => {
     <nav className="w-full flex py-6 justify-between items-center navbar">
       <div>
         <Link href="/">
-          <LogoWeiss alt="logo" className=" 2xl:ml-[-100px] mr-20" width={450} height={150} />
+          <Image src={LogoWeiss} alt="logo" className="mr-16" width={450} height={150} />
         </Link>
       </div>
-     <div>
+      <div>
         <ul className="list-none sm:flex hidden justify-start items-center flex-1">
-          {navLinks.map((nav, index) => (
+          {navLinks.map((nav) => (
             <li
               key={nav.id}
-              className={`font-poppins font-normal cursor-pointer text-[16px] ${
-                index === navLinks.length - 1 ? "mr-0" : "mr-10"
-              } text-white`}
+              className={`mr-10 ${activeIdLink === nav.id ? "text-active" : "text-inactive"}`}
+              onClick={() => handleNavLinkClick(nav)}
             >
-              <Link href={nav.id}>
-                <span
-                  className={`${activeIdLink === nav.id ? "active-id-link" : ""}`}
-                  onClick={() => handleNavLinkClick(nav)}
-                >
-                  {nav.title}
-                </span>
+              <Link href={nav.link}>
+                <span>{nav.title}</span>
               </Link>
             </li>
           ))}
@@ -66,14 +60,10 @@ const Navbar = () => {
               <li
                 key={nav.id}
                 className="font-poppins font-medium cursor-pointer text-[16px] mb-4 text-white"
+                onClick={() => handleNavLinkClick(nav)}
               >
-                <Link href={nav.id}>
-                  <span
-                    className={`${activeIdLink === nav.id ? "active-id-link" : ""}`}
-                    onClick={() => handleNavLinkClick(nav)}
-                  >
-                    {nav.title}
-                  </span>
+                <Link href={nav.link}>
+                  <span className={`${activeIdLink === nav.id ? "active-id-link" : ""}`}>{nav.title}</span>
                 </Link>
               </li>
             ))}
@@ -82,6 +72,4 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}

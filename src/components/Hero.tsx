@@ -1,15 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import team from "@/assets/itsz_team.png";
-import zammad from "@/assets/logo_zammad.png";
-import info from "@/assets/itsz_FAQ.png";
+import team from "../../public/assets/images/itsz_team.png";
+import zammad from "../../public/assets/images/logo_zammad.png";
+import info from "../../public/assets/images/itsz_FAQ.png";
 
 // import { email, request } from "../../assets";
 
-const Page = () => {
+export default function Hero() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-8 sm:p-20 font-[family-name:var(--font-geist-sans)] text-black">
       <main className="w-full max-w-4xl flex-grow">
         <section className="my-16 text-center">
           <h2 className="text-3xl font-semibold">IT-Servicezentrum</h2>
@@ -44,8 +43,5 @@ const Page = () => {
           </ul>
         </section>
       </main>
-    </div>
   );
 };
-
-export default Page;

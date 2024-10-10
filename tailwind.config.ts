@@ -11,6 +11,11 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        modernGreen: {
+          DEFAULT: '#004d3d', // Darker green color
+          light: '#00FF00',   // Light green color
+          dark: '#003300',    // Even darker green color
+        },
       },
     },
   },

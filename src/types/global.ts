@@ -1,8 +1,9 @@
-import github from "@assets/images/github.png";
+import github from "../../public/assets/images/github.png";
 import { StaticImageData } from "next/image";
 import { Key } from "react";
 
 interface NavLink {
+  link: string;
   id: string;
   title: string;
 }
@@ -27,18 +28,22 @@ interface SocialMedia {
 
 export const navLinks: NavLink[] = [
   {
+    link: "/home",
     id: "#home",
     title: "Home",
   },
   {
+    link: "/about",
     id: "#about",
     title: "Über uns",
   },
   {
+    link: "/schauma",
     id: "#Schauma",
     title: "Cool",
   },
   {
+    link: "/cool",
     id: "#Cool",
     title: "Cool",
   },
