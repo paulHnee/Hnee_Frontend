@@ -1,11 +1,14 @@
-import styles from "@/styles/style";
-import Hero from "@/components/Hero";
-import Zeiten from "@/components/Zeiten";
-import Kontakt from "@/components/Kontakt";
-import React from "react";
+'use client';
 
-const Front = () => (
-  <div>
+import React from 'react';
+import styles from '@/styles/style';
+import Hero from '@/components/Hero';
+import Zeiten from '@/components/Zeiten';
+import Kontakt from '@/components/Kontakt';
+
+const HomePage = () => {
+  return (
+    <div>
     <div className={`bg-primary ${styles.flexCenter}`}>
       <div className={`${styles.boxWidth}`}>
         <Hero />
@@ -22,6 +25,7 @@ const Front = () => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
-export default Front;
+export default HomePage;

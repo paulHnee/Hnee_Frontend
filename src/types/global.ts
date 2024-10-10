@@ -1,4 +1,4 @@
-import github from "../../public/assets/images/github.png";
+import github from "@/assets/images/github.png"
 import { StaticImageData } from "next/image";
 import { Key } from "react";
 

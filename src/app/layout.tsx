@@ -1,49 +1,26 @@
 import "@/styles/globals.css";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import styles from "@/styles/style";
-import React from 'react';
+import type { Metadata } from "next";
+import DashboardWrapper from "./dashboardWrapper";
+import { Inter } from "next/font/google";
 
-const openGraph = {
-  type: "website",
-  locale: "de_DE",
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "ITSZ - HNEE",
+  description: "Startseite des IT-Servicezentrums der Hochschule für nachhaltige Entwicklung Eberswalde",
+  authors: [{ name: "Paul Buchwald", url: "https://paulokh.com" }],
 };
 
-const metadata = {
-  title: "IT-Servicezentrum",
-  discription: "IT-Servicezentrum der Hochschule für nachhaltige Entwicklung Eberswalde",
-  author: "Paul Buchwald"
-};
-
-export default function RootLayout({ children, }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{metadata.title}</title>
-        <meta property="og:type" content={openGraph.type} />
-        <meta property="og:locale" content={openGraph.locale} />
-        <meta name="description" content={metadata.discription} />
-        <meta name="author" content={metadata.author} />
-      </head>
-      <body>
-      <div className="bg-modernGreen overflow-hidden w-full">
-        <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-          <div className={`${styles.boxWidth}`}>
-            <Navbar />
-          </div>
-        </div>
-      </div>
-      <div className={`bg-slate-200 ${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
-          <main>
-            {children}
-          </main>
-          <Footer />
-        </div>
-      </div>
+      <body className={inter.className}>
+        <DashboardWrapper>{children}</DashboardWrapper>
       </body>
     </html>
   );
-};
+}
