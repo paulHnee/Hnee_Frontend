@@ -1,5 +1,6 @@
 import github from "@assets/images/github.png";
 import { StaticImageData } from "next/image";
+import { Key } from "react";
 
 interface NavLink {
   id: string;
@@ -13,6 +14,7 @@ interface FooterLink {
 }
 
 interface FooterSection {
+  key: Key | null | undefined;
   title: string;
   links: FooterLink[];
 }
@@ -43,37 +45,39 @@ export const navLinks: NavLink[] = [
 ];
 
 export const footerLinks: FooterSection[] = [
-  {
-    title: "Community",
-    links: [
+    {
+        title: "Community",
+        links: [
+            {
+                external: true,
+                name: "Homepage",
+                link: "https://hnee.de",
+            },
+            {
+                external: false,
+                name: "Folgt",
+                link: "",
+            },
+        ],
+        key: undefined
+    },
       {
-        external: true,
-        name: "Homepage",
-        link: "https://hnee.de",
+          title: "LEGAL",
+          links: [
+              {
+                  external: true,
+                  name: "Impressum",
+                  link: "https://new.hnee.de/impressum",
+              },
+              {
+                  external: true,
+                  name: "Datenschutzerklärung",
+                  link: "https://new.hnee.de/datenschutzerklaerung",
+              },
+          ],
+          key: undefined
       },
-      {
-        external: false,
-        name: "Folgt",
-        link: "",
-      },
-    ],
-  },
-  {
-    title: "LEGAL",
-    links: [
-      {
-        external: true,
-        name: "Impressum",
-        link: "https://new.hnee.de/impressum",
-      },
-      {
-        external: true,
-        name: "Datenschutzerklärung",
-        link: "https://new.hnee.de/datenschutzerklaerung",
-      },
-    ],
-  },
-];
+    ];
 
 export const socialMedia: SocialMedia[] = [
   {

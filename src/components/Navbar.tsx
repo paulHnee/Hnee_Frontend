@@ -9,9 +9,9 @@ import { navLinks } from "@/types/global";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
-  const [activeIdLink, setActiveIdLink] = useState(null);
+  const [activeIdLink, setActiveIdLink] = useState<string | null>(null);
 
-  const handleNavLinkClick = (nav) => {
+  const handleNavLinkClick = (nav: { id: string; title: string }) => {
     setActiveIdLink(nav.id);
     setToggle(false); // Close the mobile menu
   };
