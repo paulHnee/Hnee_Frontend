@@ -1,12 +1,14 @@
-import styles from "../app/style";
-import { Kontakt, Page, Zeiten } from "./index";
+import styles from "@/styles/style";
+import Hero from "@/components/Hero";
+import Zeiten from "@/components/Zeiten";
+import Kontakt from "@/components/Kontakt";
 import React from "react";
 
 const Front = () => (
   <div>
     <div className={`bg-primary ${styles.flexCenter}`}>
       <div className={`${styles.boxWidth}`}>
-        <Page />
+        <Hero />
       </div>
     </div>
     <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>

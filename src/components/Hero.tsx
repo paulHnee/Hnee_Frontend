@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import team from "../../assets/itsz_Team.png";
-import info from "../../assets/itsz_FAQ.png";
-import zammad from "../../assets/logo_zammad.png";
+import team from "@/assets/itsz_team.png";
+import zammad from "@/assets/logo_zammad.png";
+import info from "@/assets/itsz_FAQ.png";
+
 // import { email, request } from "../../assets";
 
 const Page = () => {

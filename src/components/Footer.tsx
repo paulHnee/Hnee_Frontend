@@ -1,9 +1,7 @@
-'use client';
-
 import Link from 'next/link';
-import styles from '../app/style';
+import styles from '@/styles/style';
 import Image from 'next/image';
-import { footerLinks, socialMedia } from '../constant'; // Ensure this path is correct
+import { footerLinks, socialMedia } from '@/types/global'
 
 const Footer = () => {
   return (
