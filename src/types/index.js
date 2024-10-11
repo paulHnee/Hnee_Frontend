@@ -1,4 +1,4 @@
-import { github } from "../app/assets";
+import { github } from "../assets";
 
 export const navLinks = [
   {
