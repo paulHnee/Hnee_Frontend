@@ -1,6 +1,6 @@
 import styles from "../style";
 import "../App.css";
-import { Page, AboutMe, Portfolio } from "../web";
+import { Page, AboutMe, Zeiten } from "../web";
 
 const Front = () => (
   <div>
@@ -16,7 +16,7 @@ const Front = () => (
     </div>
     <div className={`${styles.paddingX} ${styles.flexCenter}`}>
       <div className={`${styles.boxWidth}`}>
-        <Portfolio />
+        <Zeiten />
       </div>
     </div>
   </div>

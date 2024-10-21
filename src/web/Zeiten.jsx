@@ -1,14 +1,33 @@
 import React from 'react'
-import { Layout } from '../Layout'
 
 const Zeiten = () => {
   return (
-    <Layout>
-        <div>
-            test
+        <div className='flex flex-row justify-center'>
+            <ul className='flex flex-col w-64'>
+              <li className='font-semibold bg-zinc-300 border-solid border text-center'>
+                Test
+              </li>
+              <li className=''>
+                
+              </li>
+            </ul>
+            <ul className='flex flex-col w-64'>
+              <li className='font-semibold bg-zinc-300 border border-solid text-center'>
+                Test
+              </li>
+              <li>
+                TEst
+              </li>
+            </ul>
+            <ul className='flex flex-col w-64'>
+              <li className='font-semibold bg-zinc-300 border border-solid text-center'>
+                Test
+              </li>
+              <li>
+                TEst
+              </li>
+            </ul>
         </div>
-    </Layout>
   )
 }
-
 export default Zeiten
