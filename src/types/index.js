@@ -76,11 +76,11 @@ export const footerLinks = [
     links: [
       {
         name: "Impressum",
-        link: "https://new.hnee.de/impressum",
+        link: "https://hnee.de/impressum",
       },
       {
         name: "Datenschutzerklärung",
-        link: "https://new.hnee.de/datenschutzerklaerung",
+        link: "https://hnee.de/datenschutzerklaerung",
       },
     ],
   },

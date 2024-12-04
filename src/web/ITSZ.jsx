@@ -29,7 +29,7 @@ const ITSZ = () => {
               href="mailto:itsz@hnee.de"
               className="hover:underline hover:text-blue-400"
             >
-              itsz@hnee.de
+              itsz(at)hnee.de
             </a>
           </span>
         </div>
@@ -58,7 +58,15 @@ const ITSZ = () => {
                 href="mailto:it-support@hnee.de"
                 className="text-modernGreen hover:underline hover:text-blue-400"
               >
-                it-support@hnee.de
+                it-support(at)hnee.de
+              </a>
+              <br/>
+              <b>Beschaffung: </b>
+              <a
+                href="mailto:it-einkauf@hnee.de"
+                className="text-modernGreen hover:underline hover:text-blue-400"
+              >
+                it-einkauf(at)hnee.de
               </a>
             </p>
           </div>
