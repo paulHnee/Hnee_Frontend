@@ -3,7 +3,7 @@ import React from "react";
 function VPN() {
   return (
     <div>
-      <div className="border-solid border flex flex-row">
+      <div className="border-solid border flex flex-row mt-10">
         <div className="border-solid border flex flex-col items-start">
           <p className="bold font-semibold">Public-key:</p>
           <textarea
@@ -18,8 +18,8 @@ function VPN() {
         </div>
         <div className="border-solid ml-20">
           <p className="bold font-medium ">VPN Liste</p>
-          <button>
-            <img alt="reload" />
+          <button className="border-gray-50 border border-solid shadow-inner h-8 w-8 rounded-md flex items-end bg-white">
+            <img src="" alt="reload" />
           </button>
           <div className="border border-solid rounded-sm shadow-inner">
             <ul>
@@ -29,7 +29,11 @@ function VPN() {
           </div>
         </div>
       </div>
-      <div className="border-solid h-36 w-36">Konfig</div>
+      <div className="">Konfiguration
+        <div className="border border-black border-solid h-36 w-36 shadow-inner">
+          <i>Config</i>
+        </div>
+      </div>
     </div>
   );
 }
