@@ -10,7 +10,7 @@ export const navLinks = [
     title: "Über uns",
   },
   {
-    id: "#Schauma",
+    id: "#schauma",
     title: "Cool",
   },
   {
@@ -62,8 +62,8 @@ export const footerLinks = [
         link: "beschaffung",
       },
       {
-        name: "Folgt",
-        link: "",
+        name: "VPN",
+        link: "vpn",
       },
       {
         name: "Folgt",

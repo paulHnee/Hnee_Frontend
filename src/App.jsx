@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
-import { Front, ITSZ, Zeiten } from "./web";
+import { Front, ITSZ, Zeiten, VPN } from "./web";
 import {Layout} from "./Layout"
 
 function App(){
@@ -12,6 +12,7 @@ function App(){
           <Route path="/" element={<Front />}/>
           <Route path="/itsz" element={<ITSZ />}/>
           <Route path="/zeiten" element={<Zeiten />}/>
+          <Route path="/vpn" element={<VPN />}/>
         </Route>
       </Routes>
     </Router>
