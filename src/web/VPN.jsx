@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { sendPublicKey, fetchVPNList, deleteVPNEntry } from '../types/api'; // Adjust the path
 
 function VPN() {
     const [publicKey, setPublicKey] = useState('');
-    const [vpnList, setVPNList] = useState([]);
+    const [vpnList, setVpnList] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState('');
+
+    const apiBaseUrl = 'http://localhost:8080/api'; // Replace with your Spring API base URL
 
     const handleSend = async () => {
         setLoading(true);
-        setError(null);
-
+        setError('');
         try {
-            await sendPublicKey(publicKey);
-            alert('Public key sent successfully!');
+            const response = await fetch(`${apiBaseUrl}/public-key`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ publicKey }),
+            });
+
+            if (response.ok) {
+                alert('Public key sent successfully');
+                setPublicKey('');
+                refreshVPNList(); // Refresh list after sending the key
+            } else {
+                const errorData = await response.json();
+                setError(errorData.message || 'Error sending public key');
+            }
         } catch (err) {
-            setError(err.message);
+            setError('Failed to send public key');
         } finally {
             setLoading(false);
         }
@@ -23,13 +35,18 @@ function VPN() {
 
     const refreshVPNList = async () => {
         setLoading(true);
-        setError(null);
-
         try {
-            const list = await fetchVPNList();
-            setVPNList(list);
+            const response = await fetch(`${apiBaseUrl}/vpn-list`, {
+                method: 'GET',
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setVpnList(data);
+            } else {
+                setError('Error fetching VPN list');
+            }
         } catch (err) {
-            setError(err.message);
+            setError('Failed to fetch VPN list');
         } finally {
             setLoading(false);
         }
@@ -37,20 +54,25 @@ function VPN() {
 
     const handleDelete = async (id) => {
         setLoading(true);
-        setError(null);
-
         try {
-            await deleteVPNEntry(id);
-            setVPNList(vpnList.filter((entry) => entry.id !== id)); // Update state
+            const response = await fetch(`${apiBaseUrl}/vpn/${id}`, {
+                method: 'DELETE',
+            });
+            if (response.ok) {
+                alert('VPN entry deleted');
+                refreshVPNList(); // Refresh list after deletion
+            } else {
+                setError('Error deleting VPN entry');
+            }
         } catch (err) {
-            setError(err.message);
+            setError('Failed to delete VPN entry');
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        refreshVPNList(); // Fetch list on component mount
+        refreshVPNList(); // Fetch VPN list on component load
     }, []);
 
     return (
@@ -104,7 +126,6 @@ function VPN() {
             <div className="">
                 Konfiguration
                 <div className="border border-black border-solid h-36 w-36 shadow-inner">
-                    {/* TODO: Fetch and display configuration */}
                     <i>Config</i>
                 </div>
             </div>

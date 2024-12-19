@@ -6,7 +6,7 @@ import Front from "./Front.jsx"
 import Portfolio from "./Portfolio.jsx"
 import ITSZ from "./ITSZ.jsx"
 import Zeiten from "./Zeiten.jsx"
-import VPN from "./VPN.jsx"
+import Auth from "./Auth.jsx"
 
 
 export {
@@ -18,5 +18,5 @@ export {
     Portfolio,
     ITSZ,
     Zeiten,
-    VPN
+    Auth
 }
