@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import VPN_List from './Vpnlist';
 
 function VPN() {
     const [publicKey, setPublicKey] = useState('');
@@ -6,8 +7,9 @@ function VPN() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const apiBaseUrl = 'http://localhost:8080/api'; // Replace with your Spring API base URL
+    const apiBaseUrl = 'http://localhost:5000/api'; // Your Express API base URL
 
+    // Function to send public key to the backend
     const handleSend = async () => {
         setLoading(true);
         setError('');
@@ -21,7 +23,7 @@ function VPN() {
             if (response.ok) {
                 alert('Public key sent successfully');
                 setPublicKey('');
-                refreshVPNList(); // Refresh list after sending the key
+                refreshVPNList(); // Refresh VPN list after sending the key
             } else {
                 const errorData = await response.json();
                 setError(errorData.message || 'Error sending public key');
@@ -33,6 +35,7 @@ function VPN() {
         }
     };
 
+    // Function to refresh the VPN list from the backend
     const refreshVPNList = async () => {
         setLoading(true);
         try {
@@ -52,6 +55,7 @@ function VPN() {
         }
     };
 
+    // Function to delete a VPN entry by its id
     const handleDelete = async (id) => {
         setLoading(true);
         try {
@@ -60,7 +64,7 @@ function VPN() {
             });
             if (response.ok) {
                 alert('VPN entry deleted');
-                refreshVPNList(); // Refresh list after deletion
+                refreshVPNList(); // Refresh VPN list after deletion
             } else {
                 setError('Error deleting VPN entry');
             }
@@ -71,62 +75,53 @@ function VPN() {
         }
     };
 
+    // Fetch the VPN list when the component mounts
     useEffect(() => {
-        refreshVPNList(); // Fetch VPN list on component load
+        refreshVPNList();
     }, []);
 
     return (
-        <div>
-            <div className="border-solid border flex flex-row mt-10">
-                <div className="border-solid border flex flex-col items-start">
-                    <p className="bold font-semibold">Public-key:</p>
-                    <textarea
-                        className="h-6 w-44 border-solid rounded-md"
-                        placeholder="publickey"
-                        value={publicKey}
-                        onChange={(e) => setPublicKey(e.target.value)}
-                        inputMode="text"
-                        id="p_pbk001"
-                    />
-                    <button
-                        className="border border-solid shadow-md rounded-md bg-modernGreen text-white mt-2 w-20 hover:bg-modernGreen-dark"
-                        onClick={handleSend}
-                        disabled={loading}
-                    >
-                        {loading ? 'Sending...' : 'Senden'}
-                    </button>
-                    {error && <p className="text-red-500 mt-2">{error}</p>}
-                </div>
-                <div className="border-solid ml-20">
-                    <p className="bold font-medium">VPN Liste</p>
-                    <button
-                        className="border-gray-50 border border-solid shadow-inner h-8 w-8 rounded-md flex items-center bg-white"
-                        onClick={refreshVPNList}
-                        disabled={loading}
-                    >
-                        🔄
-                    </button>
-                    <div className="border border-solid rounded-sm shadow-inner">
-                        <ul>
-                            {vpnList.map((entry) => (
-                                <li key={entry.id} className="flex justify-between">
-                                    {entry.name}
-                                    <button
-                                        className="text-red-500 ml-4"
-                                        onClick={() => handleDelete(entry.id)}
-                                    >
-                                        Delete
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
+        <div className="container mx-auto p-4">
+            <h1 className="text-2xl font-semibold mb-4">VPN Management</h1>
+
+            {/* Public Key Submission */}
+            <div className="flex flex-col border p-4 rounded-lg shadow-md mb-6">
+                <p className="font-semibold mb-2">Public Key:</p>
+                <textarea
+                    className="border p-2 rounded-md mb-2"
+                    placeholder="Enter public key here"
+                    value={publicKey}
+                    onChange={(e) => setPublicKey(e.target.value)}
+                    rows="4"
+                    cols="50"
+                />
+                <button
+                    className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+                    onClick={handleSend}
+                    disabled={loading}
+                >
+                    {loading ? 'Sending...' : 'Send Public Key'}
+                </button>
+                {error && <p className="text-red-500 mt-2">{error}</p>}
             </div>
-            <div className="">
-                Konfiguration
-                <div className="border border-black border-solid h-36 w-36 shadow-inner">
-                    <i>Config</i>
+
+            {/* VPN List */}
+            <div className="flex flex-col border p-4 rounded-lg shadow-md">
+                <VPN_List />
+                <button
+                    className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 mt-4"
+                    onClick={refreshVPNList}
+                    disabled={loading}
+                >
+                    {loading ? 'Loading...' : 'Refresh List'}
+                </button>
+            </div>
+
+            {/* Config Section */}
+            <div className="mt-6">
+                <p className="font-semibold">Configuration</p>
+                <div className="border p-4 rounded-lg shadow-md">
+                    <i>Config details here...</i>
                 </div>
             </div>
         </div>
