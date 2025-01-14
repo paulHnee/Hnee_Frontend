@@ -4,7 +4,6 @@ import { Front, ITSZ, Zeiten, Login, Dashboard} from "./web";
 import {Layout} from "./Layout"
 
 function App(){
-  const isAuthenticated = localStorage.getItem("authToken");
   return(
     <Router>
       <Routes>
@@ -14,7 +13,7 @@ function App(){
           <Route path="/itsz" element={<ITSZ />}/>
           <Route path="/zeiten" element={<Zeiten />}/>
           <Route path="/login" element={<Login />}/>
-          <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />} />
+          <Route path="/dashboard" element={<Dashboard /> }/>
           <Route path="/vpn" element={<Navigate to="/dashboard" />}/>
         </Route>
       </Routes>

@@ -13,6 +13,8 @@ module.exports = {
           DEFAULT: '#004d3d', // Darker green color
           light: '#00FF00',   // Light green color
           dark: '#003300',    // Even darker green color
+          button: '#3c7a5f', // Green color for button
+          hover: '#20c997',  // Green color for hover effect
         },
       },
       fontFamily: {
