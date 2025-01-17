@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const VpnList = ({ vpnList, setVpnList, deleteVPN }) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error] = useState('');
 
   useEffect(() => {
     // Example of setting loading and error states

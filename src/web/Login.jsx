@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { login, fetchProtectedData } from '../api/auth';
+import { login } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [token, setToken] = useState(null);
+  const [, setError] = useState('');
+  const [, setToken] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
