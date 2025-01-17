@@ -1,81 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-const apiBaseUrl = 'http://10.1.2.164:5000/api';
-
-const isTokenExpired = (token) => {
-  if (!token) return true;
-  const payload = JSON.parse(atob(token.split('.')[1]));
-  return payload.exp * 1000 < Date.now();
-};
-
-const refreshAccessToken = async () => {
-  const refreshToken = localStorage.getItem('refreshToken');
-  if (!refreshToken) throw new Error('No refresh token available');
-
-  const response = await fetch(`${apiBaseUrl}/refresh-token`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ refreshToken }),
-  });
-
-  if (response.ok) {
-    const data = await response.json();
-    localStorage.setItem('accessToken', data.accessToken);
-    return data.accessToken;
-  } else {
-    throw new Error('Failed to refresh access token');
-  }
-};
-
-const fetchWithToken = async (url, options = {}) => {
-  let accessToken = localStorage.getItem('accessToken');
-
-  if (isTokenExpired(accessToken)) {
-    try {
-      accessToken = await refreshAccessToken();
-    } catch (error) {
-      console.error('Failed to refresh access token:', error);
-      throw error;
-    }
-  }
-
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      ...options.headers,
-      'Authorization': `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Failed to fetch');
-  }
-
-  return response.json();
-};
-
 const VpnList = ({ vpnList, setVpnList, deleteVPN }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const fetchVPNList = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const data = await fetchWithToken(`${apiBaseUrl}/vpn-list`);
-      setVpnList(data);
-    } catch (err) {
-      console.error('Error fetching VPN list:', err);
-      setError(err.message || 'Error fetching VPN list');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchVPNList();
+    // Example of setting loading and error states
+    setLoading(true);
+    // Simulate fetching data
+    setTimeout(() => {
+      setLoading(false);
+      // setError('Failed to fetch VPN data'); // Uncomment to simulate an error
+    }, 2000);
   }, []);
 
   return (

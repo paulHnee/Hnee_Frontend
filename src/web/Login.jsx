@@ -1,39 +1,34 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { login, fetchProtectedData } from '../api/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // React Router's useNavigate hook
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") handleSubmit(e);
-  };
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [token, setToken] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch("http://10.1.2.164:5000/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Login failed");
-      }
-
-      // Store the token
-      localStorage.setItem("authToken", data.token);      
-      navigate("/dashboard");  // Should navigate if everything works
+      const data = await login(username, password);
+      localStorage.setItem('token', data.token); // Store the token
+      setToken(data.token);
+      setError('');
+      console.log('Login successful');
+      navigate('/dashboard'); // Navigate to dashboard
     } catch (err) {
-      console.error("Login failed:", err.message);
+      setError(err.message);
     }
   };
-  
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
+    }
+  };
+
   return (
     <div className="max-w-sm mx-auto p-8 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
@@ -72,7 +67,7 @@ const Login = () => {
           type="submit"
           className="w-full py-3 px-4 bg-modernGreen text-white font-semibold rounded-lg hover:bg-primary focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
         >
-         Login
+          Login
         </button>
       </form>
     </div>

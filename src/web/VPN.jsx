@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import VpnList from './VpnList';
+import VpnList from './Vpnlist';
 
 function VPN() {
     const [publicKey, setPublicKey] = useState('');
@@ -8,7 +8,7 @@ function VPN() {
     const [error, setError] = useState('');
     const [deviceType, setDeviceType] = useState('');  // New state for device type selection
 
-    const apiBaseUrl = 'http://10.1.2.164:5000/api'; // Your Express API base URL
+    const apiBaseUrl = 'http://localhost:5000/api'; // Your Express API base URL
 
     // Function to send public key to the backend
     const handleSend = async () => {
