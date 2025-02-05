@@ -6,8 +6,9 @@ import Front from "./Front.jsx"
 import Portfolio from "./Portfolio.jsx"
 import ITSZ from "./ITSZ.jsx"
 import Zeiten from "./Zeiten.jsx"
+import Login from "./Login.jsx"
 import VPN from "./VPN.jsx"
-
+import Dashboard from "./Dashboard.jsx"
 
 export {
     Navbar,
@@ -18,5 +19,7 @@ export {
     Portfolio,
     ITSZ,
     Zeiten,
-    VPN
+    Login,
+    VPN,
+    Dashboard
 }

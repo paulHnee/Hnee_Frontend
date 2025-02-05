@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
-import { Front, ITSZ, Zeiten, VPN } from "./web";
+import { Front, ITSZ, Zeiten, Login, Dashboard} from "./web";
 import {Layout} from "./Layout"
 
 function App(){
+  const isAuthenticated = localStorage.getItem("authToken");
   return(
     <Router>
       <Routes>
@@ -12,7 +13,9 @@ function App(){
           <Route path="/" element={<Front />}/>
           <Route path="/itsz" element={<ITSZ />}/>
           <Route path="/zeiten" element={<Zeiten />}/>
-          <Route path="/vpn" element={<VPN />}/>
+          <Route path="/login" element={<Login />}/>
+          <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />} />
+          <Route path="/vpn" element={<Navigate to="/dashboard" />}/>
         </Route>
       </Routes>
     </Router>
