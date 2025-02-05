@@ -76,16 +76,21 @@ const Navbar = () => {
           </li>
         ))}
         {/* Display Logout button if logged in */}
-        {isLoggedIn && (
-          <li className="font-poppins font-bold cursor-pointer text-[16px] text-white hover:text-gray-300">
+        {isLoggedIn ? (
             <button
               onClick={handleLogout}
-              className="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600"
+              className="ml-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
             >
               Logout
             </button>
-          </li>
-        )}
+          ) : (
+            <RouterNavLink
+              to="/login"
+              className="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              Login
+            </RouterNavLink>
+          )}
       </ul>
 
       <div className="sm:hidden flex flex-1 justify-end items-center">

@@ -1,26 +1,28 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";  
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); 
+  const [error, setError] = useState(""); // Add state for error message
+  const navigate = useNavigate();
 
   // Trigger the submit function if Enter is pressed
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      handleSubmit(e); 
+      handleSubmit(e);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(""); // Clear any previous error messages
 
     try {
-      const response = await fetch("http://10.1.2.164:5000/api/login", {
+      const response = await fetch("http://localhost/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await response.json();
@@ -29,13 +31,13 @@ const Login = () => {
         throw new Error(data.message || "Login failed");
       }
 
-      //store the token in localStorage
+      // Store the token in localStorage
       localStorage.setItem("authToken", data.token);
       // Redirect to site
       navigate('/dashboard');
 
     } catch (err) {
-      console.error(err.message);
+      setError(err.message); // Set the error message
       console.error("Login failed: " + err.message);
     }
   };
@@ -45,15 +47,15 @@ const Login = () => {
       <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Email:</label>
+          <label className="block text-sm font-medium text-gray-700">Benutzername:</label>
           <input
             className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="email"
-            value={email}
-            name="email"
-            autocomplete="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            value={username}
+            name="username"
+            autocomplete="username"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
             onKeyDown={handleKeyPress}
             required
           />
@@ -72,6 +74,7 @@ const Login = () => {
             required
           />
         </div>
+        {error && <p className="error-message">{error}</p>} {/* Display error message */}
         <button type="submit" className="w-full py-3 px-4 bg-modernGreen text-white font-semibold rounded-lg hover:bg-primary focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200">Login</button>
       </form>
     </div>
