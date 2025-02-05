@@ -37,7 +37,7 @@ const Login = () => {
       navigate('/dashboard');
 
     } catch (err) {
-      setError(err.message); // Set the error message
+      //setError(err.message); // Set the error message
       console.error("Login failed: " + err.message);
     }
   };
@@ -74,7 +74,6 @@ const Login = () => {
             required
           />
         </div>
-        {error && <p className="error-message">{error}</p>} {/* Display error message */}
         <button type="submit" className="w-full py-3 px-4 bg-modernGreen text-white font-semibold rounded-lg hover:bg-primary focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200">Login</button>
       </form>
     </div>

@@ -26,24 +26,24 @@ function VPN() {
   };
 
   // Delete a VPN entry
-  const deleteVPN = async (id) => {
-    setLoading(true);
-    setError("");
-    try {
-      const response = await fetch(`${API_BASE_URL}/vpn/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) {
-        throw new Error("Failed to delete VPN entry");
-      }
-      setVpnList((prevList) => prevList.filter((vpn) => vpn.ID !== id)); // Optimistic UI update
-      alert("VPN entry deleted successfully.");
-    } catch (err) {
-      setError(err.message || "Error deleting VPN entry");
-    } finally {
-      setLoading(false);
-    }
-  };
+     const handleDelete = async (id) => {
+         setLoading(true);
+         try {
+             const response = await fetch(`${API_BASE_URL}/vpn/${id}`, {
+                 method: 'DELETE',
+             });
+             if (response.ok) {
+                 alert('VPN entry deleted');
+                 fetchVPNList(); // Refresh VPN list after deletion
+             } else {
+                 setError('Error deleting VPN entry');
+             }
+         } catch (err) {
+             setError('Failed to delete VPN entry');
+         } finally {
+             setLoading(false);
+         }
+     };
 
   // Fetch the VPN list when the component loads
   useEffect(() => {
@@ -83,7 +83,7 @@ function VPN() {
                     <td className="border border-gray-400 px-4 py-2">{vpn.public_key}</td>
                     <td className="border border-gray-400 px-4 py-2">
                       <button
-                        onClick={() => deleteVPN(vpn.ID)}
+                        onClick={() => handleDelete(vpn.ID)}
                         className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
                       >
                         Delete

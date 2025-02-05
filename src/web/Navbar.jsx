@@ -79,14 +79,14 @@ const Navbar = () => {
         {isLoggedIn ? (
             <button
               onClick={handleLogout}
-              className="ml-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+              className="ml-4 px-4 py-2 bg-green-950 text-white rounded-md hover:bg-green-900"
             >
               Logout
             </button>
           ) : (
             <RouterNavLink
               to="/login"
-              className="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              className="ml-4 px-4 py-2 bg-green-950 text-white rounded-md hover:bg-green-900"
             >
               Login
             </RouterNavLink>

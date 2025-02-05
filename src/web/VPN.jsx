@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import VPN_List from './Vpnlist';
+import VpnList from './Vpnlist';
 
 function VPN() {
     const [publicKey, setPublicKey] = useState('');
-    const [vpnList, setVpnList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -23,7 +22,6 @@ function VPN() {
             if (response.ok) {
                 alert('Public key sent successfully');
                 setPublicKey('');
-                refreshVPNList(); // Refresh VPN list after sending the key
             } else {
                 const errorData = await response.json();
                 setError(errorData.message || 'Error sending public key');
@@ -35,18 +33,21 @@ function VPN() {
         }
     };
 
-    // Function to refresh the VPN list from the backend
+    // Fetch the VPN list when the component mounts
+    useEffect(() => {
+    }, []);
+
+    // Function to refresh the VPN list
     const refreshVPNList = async () => {
         setLoading(true);
+        setError('');
         try {
-            const response = await fetch(`${apiBaseUrl}/vpn-list`, {
-                method: 'GET',
-            });
+            const response = await fetch(`${apiBaseUrl}/vpn-list`);
             if (response.ok) {
-                const data = await response.json();
-                setVpnList(data);
+                // Handle the response data as needed
             } else {
-                setError('Error fetching VPN list');
+                const errorData = await response.json();
+                setError(errorData.message || 'Error fetching VPN list');
             }
         } catch (err) {
             setError('Failed to fetch VPN list');
@@ -54,31 +55,6 @@ function VPN() {
             setLoading(false);
         }
     };
-
-    // Function to delete a VPN entry by its id
-    const handleDelete = async (id) => {
-        setLoading(true);
-        try {
-            const response = await fetch(`${apiBaseUrl}/vpn/${id}`, {
-                method: 'DELETE',
-            });
-            if (response.ok) {
-                alert('VPN entry deleted');
-                refreshVPNList(); // Refresh VPN list after deletion
-            } else {
-                setError('Error deleting VPN entry');
-            }
-        } catch (err) {
-            setError('Failed to delete VPN entry');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Fetch the VPN list when the component mounts
-    useEffect(() => {
-        refreshVPNList();
-    }, []);
 
     return (
         <div className="container mx-auto p-4">
@@ -107,7 +83,7 @@ function VPN() {
 
             {/* VPN List */}
             <div className="flex flex-col border p-4 rounded-lg shadow-md">
-                <VPN_List />
+                <VpnList />
                 <button
                     className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 mt-4"
                     onClick={refreshVPNList}
