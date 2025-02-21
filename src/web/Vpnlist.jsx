@@ -1,63 +1,59 @@
 import React, { useState, useEffect } from "react";
+import { fetchVPNList, refreshVPNList, deleteVPN } from '../api./api';
 
 function VPN() {
   const [vpnList, setVpnList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const API_BASE_URL = "http://localhost:5000/api";
-
-  // Fetch VPN List
-  const fetchVPNList = async () => {
+  const fetchList = async () => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`${API_BASE_URL}/vpn-list`);
-      if (!response.ok) {
-        throw new Error("Failed to fetch VPN list");
-      }
-      const data = await response.json();
+      const data = await fetchVPNList();
       setVpnList(data);
     } catch (err) {
-      setError(err.message || "Error fetching VPN list");
+      setError("Error fetching VPN list");
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
-  // Delete a VPN entry
-  const deleteVPN = async (id) => {
+  const refreshList = async () => {
+    setLoading(true);
+    try {
+      const data = await refreshVPNList();
+      setVpnList(data);
+    } catch (err) {
+      setError('Failed to fetch VPN list');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`${API_BASE_URL}/vpn/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) {
-        throw new Error("Failed to delete VPN entry");
-      }
-      setVpnList((prevList) => prevList.filter((vpn) => vpn.ID !== id)); // Optimistic UI update
+      await deleteVPN(id);
+      setVpnList((prevList) => prevList.filter((vpn) => vpn.ID !== id));
       alert("VPN entry deleted successfully.");
     } catch (err) {
-      setError(err.message || "Error deleting VPN entry");
+      setError("Error deleting VPN entry");
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
-  // Fetch the VPN list when the component loads
   useEffect(() => {
-    fetchVPNList();
+    fetchList();
   }, []);
 
   return (
-    <div className="container mx-auto mt-10">
-      <h1 className="text-2xl font-bold mb-4">VPN Management</h1>
-
-      {/* Error Message */}
-      {error && <p className="text-red-500 mb-4">Error: {error}</p>}
-
-      {/* Loading Indicator */}
+    <div>
       {loading ? (
         <p>Loading VPN list...</p>
       ) : (
@@ -66,11 +62,11 @@ function VPN() {
           <table className="table-auto border-collapse border border-gray-400 w-full text-left">
             <thead>
               <tr className="bg-gray-100">
-                <th className="border border-gray-400 px-4 py-2">ID</th>
+                <th className="border border-gray-400 px-4 py-2">Nummer</th>
                 <th className="border border-gray-400 px-4 py-2">Name</th>
                 <th className="border border-gray-400 px-4 py-2">IP</th>
                 <th className="border border-gray-400 px-4 py-2">Public Key</th>
-                <th className="border border-gray-400 px-4 py-2">Actions</th>
+                <th className="border border-gray-400 px-4 py-2"></th>
               </tr>
             </thead>
             <tbody>
@@ -83,7 +79,7 @@ function VPN() {
                     <td className="border border-gray-400 px-4 py-2">{vpn.public_key}</td>
                     <td className="border border-gray-400 px-4 py-2">
                       <button
-                        onClick={() => deleteVPN(vpn.ID)}
+                        onClick={() => handleDelete(vpn.ID)}
                         className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
                       >
                         Delete
@@ -102,6 +98,13 @@ function VPN() {
           </table>
         </div>
       )}
+      <button
+        className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 mt-4"
+        onClick={refreshList}
+        disabled={loading}
+      >
+        {loading ? 'Loading...' : 'Refresh List'}
+      </button>
     </div>
   );
 }
