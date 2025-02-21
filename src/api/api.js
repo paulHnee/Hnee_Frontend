@@ -47,6 +47,7 @@ export const sendPublicKey = async (publicKey, Device) => {
   });
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(errorData.message || 'Error sending public key');
+    console.error("Error sending public key", errorData);
+    throw new Error('Error sending public key');
   }
 };
