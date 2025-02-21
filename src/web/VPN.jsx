@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import VPN_List from './Vpnlist';
+import VPNlist from './Vpnlist';
 
 function VPN() {
     const [publicKey, setPublicKey] = useState('');
+    const [Device, setDevice] = useState('');
     const [vpnList, setVpnList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const apiBaseUrl = 'http://localhost:5000/api'; // Your Express API base URL
+    const apiBaseUrl = 'http://localhost:5000/api'; 
 
     // Function to send public key to the backend
     const handleSend = async () => {
@@ -17,7 +18,7 @@ function VPN() {
             const response = await fetch(`${apiBaseUrl}/public-key`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ publicKey }),
+                body: JSON.stringify({ publicKey, Device }),
             });
 
             if (response.ok) {
@@ -107,7 +108,7 @@ function VPN() {
 
             {/* VPN List */}
             <div className="flex flex-col border p-4 rounded-lg shadow-md">
-                <VPN_List />
+                <VPNlist vpnList={vpnList} onDelete={handleDelete} />
                 <button
                     className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 mt-4"
                     onClick={refreshVPNList}

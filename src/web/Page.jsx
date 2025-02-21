@@ -36,6 +36,7 @@ const Page = () => {
               </a>
             </li>
           </ul>
+          <iframe src="http://10.1.1.45:3000/public-dashboards/d2b660b6ada246e3ac6f995a9fbd91bb" width="1000" height="800" title="Monitoring" className="mt-8"></iframe>
         </section>
       </main>
     </div>
