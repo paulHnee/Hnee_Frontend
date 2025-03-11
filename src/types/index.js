@@ -10,8 +10,8 @@ export const navLinks = [
     title: "Über uns",
   },
   {
-    id: "#schauma",
-    title: "Cool",
+    id: "#vpn",
+    title: "VPN",
   },
   {
     id: "#Cool",
