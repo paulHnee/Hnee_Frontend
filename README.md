@@ -104,4 +104,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 For any questions or support, feel free to contact:
 
-📩 Paul Buchwald – paul.buchwaldt@hnee.de
+📩 Paul Buchwald – paul.buchwald@hnee.de
