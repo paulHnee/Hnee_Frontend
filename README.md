@@ -68,7 +68,6 @@ We welcome contributions to improve this project. To contribute, follow these st
 ## License
 This project is licensed under the MIT License. See the Sure, here is the rest of the README.md file:
 
-```markdown
 2. Navigate to the project directory:
    ```sh
    cd homepage
