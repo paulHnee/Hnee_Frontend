@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchVPNList, refreshVPNList, deleteVPN } from './api';
+import { fetchVPNList, refreshVPNList, deleteVPN } from '../api/api';
 
 function VPN() {
   const [vpnList, setVpnList] = useState([]);

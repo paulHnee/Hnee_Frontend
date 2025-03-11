@@ -8,15 +8,30 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
-    setIsAuthenticated(!!token);
+    if (token) {
+      // Optionally, you can add token expiry check here
+      setIsAuthenticated(true);
+    }
+    setLoading(false);
   }, []);
 
+  const login = (token) => {
+    localStorage.setItem('authToken', token);
+    setIsAuthenticated(true);
+  };
+
+  const logout = () => {
+    localStorage.removeItem('authToken');
+    setIsAuthenticated(false);
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
-      {children}
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+      {loading ? <div>Loading...</div> : children}
     </AuthContext.Provider>
   );
 };

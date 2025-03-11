@@ -1,43 +1,26 @@
 import React, { useState } from 'react';
 import VPNlist from './Vpnlist';
 import VPNconfiguration from './VpnConfiguration';
-import { sendPublicKey, refreshVPNList } from './api';
+import { sendPublicKey, refreshVPNList } from '../api/api';
 
 
 function VPN() {
     const [publicKey, setPublicKey] = useState('');
-    const [device, setDevice] = useState(''); // Changed Device to device (lowercase) for convention
+    const [device, setDevice] = useState('');                   
     const [loading, setLoading] = useState(false);
-    const [, setError] = useState('');
-
+    const [error, setError] = useState('');
     const handleSend = async () => {
         setLoading(true);
-        setError(''); // Clear any previous errors
-        
-        if (!publicKey || !device) {
-            setError('Public key and device name are required');
-            setLoading(false);
-            return;
-        }
-        if (publicKey.length < 32 ) {
-            setError('Public key must be atleast 32 chars');
-            setLoading(false);
-            return;
-        }
-        if (device.length < 2) {
-            setError('Device name must be atleast 2 chars');
-            setLoading(false);
-            return;
-        }      
+        setError('');                                           // Clear any previous errors     
 
         try {
             await sendPublicKey(publicKey, device);
             alert('Public key sent successfully');
             setPublicKey('');
             setDevice('');
-            refreshVPNList(); // Refresh VPN list after sending the key
+            refreshVPNList();                                   // Refresh VPN list after sending the key
         } catch (err) {
-            setError(err.message || 'Error sending public key');
+            setError('Error sending public key');
             console.log(publicKey);
             console.log(device);
         } finally {
@@ -70,6 +53,7 @@ function VPN() {
                         
                     />
                 </div>
+                {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
 
                 <div className="mb-4">
                     <label htmlFor="deviceType" className="block text-gray-700 text-sm font-bold mb-2">

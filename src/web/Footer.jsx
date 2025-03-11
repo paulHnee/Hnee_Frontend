@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link instead of NavLink for internal links
+import { Link } from 'react-router-dom';
 import styles from "../style";
 import { footerLinks, socialMedia } from "../types";
 
