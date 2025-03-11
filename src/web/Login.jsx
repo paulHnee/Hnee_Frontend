@@ -26,6 +26,7 @@ const Login = () => {
     }
 
     try {
+      //!ONLY FOR DEMO PURPOSES
       if (username === "admin" && password === "admin123") {
         localStorage.setItem("authToken", "admin");
         console.info("Login successful: admin");
