@@ -1,6 +1,7 @@
 # 🎯 IT-Servicezentrum Homepage
 
-Welcome to the IT-Servicezentrum homepage project! This project is designed to provide information and support for IT services at HNEE.
+
+Welcome to the IT homepage project! This project is designed to provide information and support for IT services at HNEE.
 
 ## 📌 Table of Contents
 
@@ -14,7 +15,7 @@ Welcome to the IT-Servicezentrum homepage project! This project is designed to p
 
 ## 🚀 Introduction
 
-The IT-Servicezentrum Homepage is a web-based platform that provides IT-related support, including VPN management, user authentication, and IT service information for HNEE.
+The IT Homepage is a web-based platform that provides IT-related support, including VPN management, user authentication, and IT service information for HNEE.
 
 ## ✨ Features
 
@@ -31,7 +32,7 @@ To get started with the project, follow these steps:
 1.  **Clone the repository**
 
     ```bash
-    git clone https://github.com/your-username/homepage.git
+    git clone https://github.com/paulHnee/Hnee_Frontend.git
     ```
 
 2.  **Navigate to the project directory**
