@@ -55,10 +55,10 @@ const ITSZ = () => {
             <p>
               <b>Email: </b>
               <a
-                href="mailto:it-support@hnee.de"
+                href="mailto:support@hnee.de"
                 className="text-modernGreen hover:underline hover:text-blue-400"
               >
-                it-support(at)hnee.de
+                support(at)hnee.de
               </a>
               <br/>
               <b>Beschaffung: </b>

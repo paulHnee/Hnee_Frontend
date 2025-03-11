@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../api/api";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // Add state for error message
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Trigger the submit function if Enter is pressed
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSubmit(e);
@@ -16,30 +17,44 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear any previous error messages
+    setError("");
+    setLoading(true);
+
+    if (!validateForm()) {
+      setLoading(false);
+      return;
+    }
 
     try {
-      const response = await fetch("http://localhost/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Login failed");
+      //!ONLY FOR DEMO PURPOSES
+      if (username === "admin" && password === "admin123") {
+        localStorage.setItem("authToken", "admin");
+        console.info("Login successful: admin");
+        navigate("/dashboard");
+      } else {
+        const data = await login(username, password);
+        localStorage.setItem("authToken", data.token);
+        console.info("Login successful: user");
+        navigate('/dashboard');
       }
-
-      // Store the token in localStorage
-      localStorage.setItem("authToken", data.token);
-      // Redirect to site
-      navigate('/dashboard');
-
     } catch (err) {
-      setError(err.message); // Set the error message
+      setError(err.message);
       console.error("Login failed: " + err.message);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const validateForm = () => {
+    if (username.trim() === "" || password.trim() === "") {
+      setError("Username and password are required.");
+      return false;
+    }
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -47,13 +62,14 @@ const Login = () => {
       <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Benutzername:</label>
+          <label className="block text-sm font-medium text-gray-700" htmlFor="username">Benutzername:</label>
           <input
             className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
+            id="username"
             value={username}
             name="username"
-            autocomplete="username"
+            autoComplete="username"
             placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
             onKeyDown={handleKeyPress}
@@ -61,21 +77,24 @@ const Login = () => {
           />
         </div>
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700">Password:</label>
+          <label className="block text-sm font-medium text-gray-700" htmlFor="password">Password:</label>
           <input
             className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="password"
+            id="password"
             value={password}
             name="password"
-            autocomplete="current-password"
+            autoComplete="current-password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
             onKeyDown={handleKeyPress}
             required
           />
         </div>
-        {error && <p className="error-message">{error}</p>} {/* Display error message */}
-        <button type="submit" className="w-full py-3 px-4 bg-modernGreen text-white font-semibold rounded-lg hover:bg-primary focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200">Login</button>
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+        <button type="submit" className="w-full py-3 px-4 bg-modernGreen text-white font-semibold rounded-lg hover:bg-primary focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200">
+          {loading ? "Loading..." : "Login"}
+        </button>
       </form>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchVPNList, refreshVPNList, deleteVPN } from '../api./api';
+import { fetchVPNList, refreshVPNList, deleteVPN } from '../api/api';
 
 function VPN() {
   const [vpnList, setVpnList] = useState([]);
@@ -22,6 +22,7 @@ function VPN() {
 
   const refreshList = async () => {
     setLoading(true);
+    setError("");
     try {
       const data = await refreshVPNList();
       setVpnList(data);
@@ -59,7 +60,7 @@ function VPN() {
       ) : (
         <div className="mt-4">
           <h2 className="text-xl font-semibold mb-2">VPN List</h2>
-          <table className="table-auto border-collapse border border-gray-400 w-full text-left">
+          <table className="table-auto border-collapse border border-gray-400 w-auto text-left">
             <thead>
               <tr className="bg-gray-100">
                 <th className="border border-gray-400 px-4 py-2">Nummer</th>

@@ -1,5 +1,22 @@
 const apiBaseUrl = 'http://localhost:5000/api';
 
+// Login function
+export const login = async (username, password) => {
+  const response = await fetch(`${apiBaseUrl}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Login failed");
+  }
+
+  return data;
+};
+
 //FETCH VPN LIST
 export const fetchVPNList = async () => {
   const response = await fetch(`${apiBaseUrl}/vpn-list`);
@@ -47,6 +64,7 @@ export const sendPublicKey = async (publicKey, Device) => {
   });
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(errorData.message || 'Error sending public key');
+    console.error("Error sending public key", errorData);
+    throw new Error('Error sending public key');
   }
 };
