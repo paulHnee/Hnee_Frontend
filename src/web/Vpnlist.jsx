@@ -27,7 +27,7 @@ function VPN() {
       const data = await refreshVPNList();
       setVpnList(data);
     } catch (err) {
-      setError('Failed to fetch VPN list');
+      setError('Failed to fetch VPN list'+ err.message);
       console.error(error);
     } finally {
       setLoading(false);

@@ -18,11 +18,15 @@ export const login = async (username, password) => {
 
   return data;
 };
-//ADD PUBKEY
-export const sendPublicKey = async (publicKey, device) => {
+
+// ADD PUBKEY
+export const sendPublicKey = async (publicKey, device, token) => {
   const response = await fetch(`${apiVPNUrl}/public_key`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
     body: JSON.stringify({ publicKey, device }),
   });
   if (!response.ok) {
@@ -32,38 +36,52 @@ export const sendPublicKey = async (publicKey, device) => {
   }
 };
 
-//DELETE ENTRY
-export const deleteVPN = async (id) => {
+// DELETE ENTRY
+export const deleteVPN = async (id, token) => {
   const response = await fetch(`${apiVPNUrl}/vpn/${id}`, {
     method: "DELETE",
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
   });
   if (!response.ok) {
     throw new Error("Failed to delete VPN entry");
   }
 };
 
-//FETCH VPN LIST
-export const fetchVPNList = async () => {
-  const response = await fetch(`${apiVPNUrl}/list`);
+// FETCH VPN LIST
+export const fetchVPNList = async (token) => {
+  const response = await fetch(`${apiVPNUrl}/list`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
   if (!response.ok) {
     throw new Error("Failed to fetch VPN list");
   }
   return await response.json();
 };
 
-//GET VPN CONFIGURATION
-export const VPNconfiguration = async () => {
-  const response = await fetch(`${apiVPNUrl}/vpn-configuration`);
+// GET VPN CONFIGURATION
+export const VPNconfiguration = async (token) => {
+  const response = await fetch(`${apiVPNUrl}/vpn-configuration`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
   if (!response.ok) {
     throw new Error("Failed to fetch VPN configuration, please contact the IT-Support");
   }
   return await response.json();
 }
 
-//REFRESH-LIST
-export const refreshVPNList = async () => {
+// REFRESH-LIST
+export const refreshVPNList = async (token) => {
   const response = await fetch(`${apiVPNUrl}/refresh`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
   });
   if (!response.ok) {
     throw new Error('Error fetching VPN list');
