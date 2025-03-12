@@ -9,8 +9,8 @@ module.exports = {
         secondary: "#92A8D1",
         dimWhite: "rgba(255, 255, 255, 0.7)",
         dimBlue: "rgba(9, 151, 124, 0.1)",
-        modernGreen: {
-          DEFAULT: '#004d3d', // Darker green color
+        modernGreen: { // MAIN COLOR
+          DEFAULT: '#004d3d', // Darker green color 
           light: '#00FF00',   // Light green color
           dark: '#003300',    // Even darker green color
         },

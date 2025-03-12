@@ -26,17 +26,9 @@ const Login = () => {
     }
 
     try {
-      //!ONLY FOR DEMO PURPOSES
-      if (username === "admin" && password === "admin123") {
-        localStorage.setItem("authToken", "admin");
-        console.info("Login successful: admin");
-        navigate("/dashboard");
-      } 
-        const data = await login(username, password);
-        localStorage.setItem("authToken", data.token);
-        console.info("Login successful: user");
-        navigate('/dashboard');
-      
+      await login(username, password);
+      console.info("Login successful, Username: " + username);
+      navigate('/dashboard');
     } catch (err) {
       setError(err.message);
       console.error("Login failed: " + err.message);

@@ -13,8 +13,15 @@ function VPN() {
         setLoading(true);
         setError('');                                           // Clear any previous errors     
 
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+            console.error("No token found");
+            setLoading(false);
+            return;
+        }
+
         try {
-            await sendPublicKey(publicKey, device);
+            await sendPublicKey(publicKey, device, token);
             alert('Public key sent successfully');
             setPublicKey('');
             setDevice('');

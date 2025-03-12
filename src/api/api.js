@@ -2,6 +2,17 @@ const apiBaseUrl = 'http://10.1.1.45:5000';
 const apiLoginUrl = `${apiBaseUrl}/api`;
 const apiVPNUrl = `${apiBaseUrl}/vpn`;
 
+// Helper function to get the token from cookies
+const getTokenFromCookies = () => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; token=`);
+  if (parts.length === 2) {
+    const token = parts.pop().split(';').shift();
+    console.log('Token retrieved from cookie:', token); // Debug log
+    return token;
+  }
+};
+
 // Login function
 export const login = async (username, password) => {
   const response = await fetch(`${apiLoginUrl}/login`, {
@@ -20,7 +31,8 @@ export const login = async (username, password) => {
 };
 
 // ADD PUBKEY
-export const sendPublicKey = async (publicKey, device, token) => {
+export const sendPublicKey = async (publicKey, device) => {
+  const token = getTokenFromCookies();
   const response = await fetch(`${apiVPNUrl}/public_key`, {
     method: 'POST',
     headers: { 
@@ -37,7 +49,8 @@ export const sendPublicKey = async (publicKey, device, token) => {
 };
 
 // DELETE ENTRY
-export const deleteVPN = async (id, token) => {
+export const deleteVPN = async (id) => {
+  const token = getTokenFromCookies();
   const response = await fetch(`${apiVPNUrl}/vpn/${id}`, {
     method: "DELETE",
     headers: {
@@ -50,7 +63,8 @@ export const deleteVPN = async (id, token) => {
 };
 
 // FETCH VPN LIST
-export const fetchVPNList = async (token) => {
+export const fetchVPNList = async () => {
+  const token = getTokenFromCookies();
   const response = await fetch(`${apiVPNUrl}/list`, {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -63,7 +77,8 @@ export const fetchVPNList = async (token) => {
 };
 
 // GET VPN CONFIGURATION
-export const VPNconfiguration = async (token) => {
+export const VPNconfiguration = async () => {
+  const token = getTokenFromCookies();
   const response = await fetch(`${apiVPNUrl}/vpn-configuration`, {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -76,7 +91,8 @@ export const VPNconfiguration = async (token) => {
 }
 
 // REFRESH-LIST
-export const refreshVPNList = async (token) => {
+export const refreshVPNList = async () => {
+  const token = getTokenFromCookies();
   const response = await fetch(`${apiVPNUrl}/refresh`, {
     method: 'GET',
     headers: {
