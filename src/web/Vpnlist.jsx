@@ -13,8 +13,8 @@ function VPN() {
       const data = await fetchVPNList();
       setVpnList(data);
     } catch (err) {
-      setError("Error fetching VPN list");
-      console.error(error);
+      setError("Error fetching VPN list"+ err.message);
+      console.error(error, err);
     } finally {
       setLoading(false);
     }
